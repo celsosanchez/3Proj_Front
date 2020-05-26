@@ -309,6 +309,7 @@ export default {
       this.$refs.bigChart.updateGradients(chartData);
       this.bigLineChart.chartData = chartData;
       this.bigLineChart.activeIndex = index;
+      
     },
     sortStart: function(data) {
       // var neosHavingData = data.filter(function (neo) {
@@ -553,7 +554,7 @@ export default {
             this.greenLineChart.chartData.labels = this.getByAffect(this.logs).aflabels;
              this.greenLineChart.chartData.datasets[0].data = this.getByAffect(this.logs).media;
             
-            this.initBigChart(0);
+            this.initBigChart(this.bigLineChart.activeIndex);
             this.loading = false;
           }
         });
@@ -563,7 +564,7 @@ export default {
     this.getData();
     setInterval(() => {
   this.getData(); 
-}, 120000);
+}, 20000);
   },
   mounted() {
     this.i18n = this.$i18n;
