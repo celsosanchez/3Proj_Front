@@ -10,6 +10,7 @@ const Icons = () => import(/* webpackChunkName: "common" */ "@/pages/Icons.vue")
 const Maps = () => import(/* webpackChunkName: "common" */ "@/pages/Maps.vue");
 const Typography = () => import(/* webpackChunkName: "common" */ "@/pages/Typography.vue");
 const TableList = () => import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
+const NetworkMap = () => import(/* webpackChunkName: "common" */ "@/pages/NetworkMap.vue");
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
         path: "profile",
         name: "profile",
         component: Profile
+      },
+      {
+        path: "network-map",
+        name: "network-map",
+        component: NetworkMap
       },
       {
         path: "notifications",

@@ -38,8 +38,8 @@
               </div>
             </div>
           </template>
-          <div class="chart-area">
-            <line-chart
+          <div  class="chart-area">
+            <line-chart 
               style="height: 100%"
               ref="bigChart"
               chart-id="big-line-chart"
@@ -150,7 +150,7 @@
           <div class="table-responsive">
             <user-table
               :columns="['Affected_Areas','Attack_Type','Level_Affectation','Start_Time','End_Time','Duration']"
-              :data="logs"
+              :data="sortedlogs"
             ></user-table>
           </div>
         </card>
@@ -176,6 +176,7 @@ export default {
   },
   data() {
     return {
+      sortedlogs: [],
       logs: [],
       talabels: [],
       timeattack: [],
@@ -183,6 +184,7 @@ export default {
       timelabels: [],
       timevalues: [],
       loading: true,
+      loadin: true,
       bigLineChart: {
         allData: [
           [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
@@ -202,7 +204,7 @@ export default {
           labels: ["labels", "labels", "labels"],
           datasets: [
             {
-              label: "Data",
+              label: "Minutes",
               fill: true,
               borderColor: config.colors.primary,
               borderWidth: 2,
@@ -530,7 +532,7 @@ export default {
         .get(url)
         .then(res => {
           this.logs = res.data.found;
-          
+          this.sortedlogs= this.logs.reverse();
         })
         .then(() => {
           if (this.logs.length > 0) {
@@ -553,7 +555,7 @@ export default {
 
             this.greenLineChart.chartData.labels = this.getByAffect(this.logs).aflabels;
              this.greenLineChart.chartData.datasets[0].data = this.getByAffect(this.logs).media;
-            
+            this.loadin =false;
             this.initBigChart(this.bigLineChart.activeIndex);
             this.loading = false;
           }
