@@ -5,8 +5,9 @@
         <h4 slot="header">Network Map</h4>
         <div class="row">
           <div class="col-md-10">
-            <card :style="{'height':'600px'}">
-              <p>NetworkMap</p>
+            <card class="network-card" :style="{'height':'600px'}">
+              <Network></Network>
+              <!-- <p>NetworkMap</p> -->
             </card>
           </div>
 
@@ -37,10 +38,12 @@
   </div>
 </template>
 <script>
+import Network from "@/components/Network"
 import { NetworkMap } from "@/components";
 import axios from "axios";
 export default {
   components: {
+    Network,
     NetworkMap
   },
   data() {
@@ -194,5 +197,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.network-card .card-body {
+  height: 100%;
 }
 </style>
