@@ -3,7 +3,8 @@
 </template>
 
 <script>
-// import vis from "vis-network";
+import { Network } from "vis-network/peer/esm/vis-network";
+import { DataSet } from "vis-data/peer";
 export default {
   name: "Network",
   methods: {
@@ -29,7 +30,7 @@ export default {
         shape: "image"
       };
 
-      edges.push({ from: 1, to: 2, length: EDGE_LENGTH_MAIN });
+      edges.push({ id: 1001, from: 1, to: 2, length: EDGE_LENGTH_MAIN });
 
       const firewalls = [
         {
@@ -141,6 +142,8 @@ export default {
 
       // create a network
       var container = document.getElementById("network");
+      nodes = new DataSet(nodes);
+      edges = new DataSet(edges);
       var data = {
         nodes: nodes,
         edges: edges
@@ -152,7 +155,11 @@ export default {
           }
         }
       };
-      let network = new vis.Network(container, data, options);
+      let network = new Network(container, data, options);
+
+      setTimeout(_ => {
+        edges.update({id: 1001, color: {color: 'red'}})
+      }, 5000)
     }
   },
   mounted() {
