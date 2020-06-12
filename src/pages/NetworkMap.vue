@@ -237,7 +237,7 @@ export default {
       if (this.dpressed) {
         this.dstart = Date(Date.now());
         var rndom = this.rndmOnDevices();
-        this.dsrc = rndom.src;
+        this.dsrc = 1;
 
         this.dobj = rndom.obj;
 
