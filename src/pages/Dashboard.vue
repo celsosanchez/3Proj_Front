@@ -97,6 +97,29 @@
           </div>
         </card>
       </div>
+      <!-- <div class="col-lg-4" :class="{'text-right': isRTL}">
+        <card type="chart">
+          <template slot="header">
+            <h5 class="card-category">Most Affected </h5>
+            <h3 class="card-title">
+              <i class="tim-icons icon-tag text-info"></i>
+              <span>
+                {{this.getByType(
+                this.logs).typelabels.length}} 
+              </span>
+            </h3>
+          </template>
+          <div v-if="!loading" class="chart-area">
+            <bar-chart
+              style="height: 100%"
+              chart-id="blue-bar-chart"
+              :chart-data="blueBarChart.chartData"
+              :gradient-stops="blueBarChart.gradientStops"
+              :extra-options="blueBarChart.extraOptions"
+            ></bar-chart>
+          </div>
+        </card>
+      </div> -->
       <div class="col-lg-4" :class="{'text-right': isRTL}">
         <card type="chart">
           <template slot="header">
@@ -263,6 +286,25 @@ export default {
               label: "Ocurrences",
               fill: true,
               borderColor: config.colors.info,
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              data: []
+            }
+          ]
+        },
+        gradientColors: config.colors.primaryGradient,
+        gradientStops: [1, 0.4, 0]
+      },
+      affectedBarChart: {
+        extraOptions: chartConfigs.barChartOptions,
+        chartData: {
+          labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
+          datasets: [
+            {
+              label: "Ocurrences",
+              fill: true,
+              borderColor: config.colors.danger,
               borderWidth: 2,
               borderDash: [],
               borderDashOffset: 0.0,
