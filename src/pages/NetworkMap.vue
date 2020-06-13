@@ -112,6 +112,7 @@ export default {
       rdminterval: "",
 
       saving: false,
+      saveDataInterval: null,
 
       savedData: 0,
 
@@ -175,6 +176,12 @@ export default {
     },
     ai(){
       this.aipressed = !this.aipressed;
+      if (this.aipressed && this.saveDataInterval == null) {
+        this.saveDataInterval = setInterval(this.savedata, 10000)
+      } else if (!this.aipressed && this.saveDataInterval != null) {
+        clearInterval(this.saveDataInterval);
+        this.saveDataInterval = null;
+      }
       [{key: "mpressed", func: "mitm"}, {key: "vpressed", func: "virus"}, {key: "rspressed", func: "rsw"}, {key: "dpressed", func: "ddos"}].forEach(({ key, func }) => {
         if (this.aipressed) {
           if (this[key] && this.timeouts[key] === null) {
@@ -413,7 +420,7 @@ export default {
   },
   mounted() {
    setInterval(() => {
-     this.nonSaved+=300;
+     this.nonSaved+=10;
    }, 3000);
    
    
