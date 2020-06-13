@@ -99,7 +99,7 @@ export default {
       for (let i = 6; i < 9; i++) {
         vlan1.push({
           id: i,
-          label: "Computer",
+          label: "Computer ("+i+")",
           image: DIR + "computer.png",
           shape: "image"
         });
@@ -112,13 +112,13 @@ export default {
         });
         this.startDevices.push({
           id: i,
-          label: "Computer",
+          label: "Computer ("+i+")",
           image: DIR + "computer.png",
           shape: "image"
         });
         this.endDevices.push({
           id: i,
-          label: "Computer",
+          label: "Computer ("+i+")",
           image: DIR + "computer.png",
           shape: "image"
         });
@@ -127,13 +127,13 @@ export default {
       const vlan2 = [
         {
           id: 9,
-          label: "Mail Server",
+          label: "Mail Server (9)",
           image: DIR + "mail-server.png",
           shape: "image"
         },
         {
           id: 10,
-          label: "Web Server",
+          label: "Web Server (10)",
           image: DIR + "web-server.png",
           shape: "image"
         }
@@ -141,13 +141,13 @@ export default {
       this.endDevices.push(
         {
           id: 9,
-          label: "Mail Server",
+          label: "Mail Server (9)",
           image: DIR + "mail-server.png",
           shape: "image"
         },
         {
           id: 10,
-          label: "Web Server",
+          label: "Web Server (10)",
           image: DIR + "web-server.png",
           shape: "image"
         }
@@ -187,7 +187,7 @@ export default {
       for (let i = 100; i < 103; i++) {
         smartphones.push({
           id: i,
-          label: "Smartphone",
+          label: "Smartphone ("+i+")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -201,13 +201,13 @@ export default {
         });
         this.endDevices.push({
           id: i,
-          label: "Smartphone",
+          label: "Smartphone ("+i+")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
         this.startDevices.push({
           id: i,
-          label: "Smartphone",
+          label: "Smartphone ("+i+")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -217,7 +217,7 @@ export default {
       const vlan4 = [
         {
           id: 12,
-          label: "Database Server",
+          label: "Database Server (12)",
           image: DIR + "database-server.png",
           shape: "image"
         }
@@ -231,7 +231,7 @@ export default {
       });
       this.endDevices.push({
         id: 12,
-        label: "Database Server",
+        label: "Database Server (12)",
         image: DIR + "database-server.png",
         shape: "image"
       });
@@ -239,7 +239,7 @@ export default {
       const vlan5 = [
         {
           id: 13,
-          label: "Backup Server",
+          label: "Backup Server (13)",
           image: DIR + "database-server.png",
           shape: "image"
         }
@@ -253,7 +253,7 @@ export default {
       });
       this.endDevices.push({
         id: 13,
-        label: "Backup Server",
+        label: "Backup Server (13)",
         image: DIR + "database-server.png",
         shape: "image"
       });
