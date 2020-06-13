@@ -220,7 +220,7 @@ export default {
         this.mend = Date(Date.now());
         var Attack_Type = "MitM";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*100;
+        this.nonSaved-=Level_Affectation*2;
         if(this.nonSaved<1){
           this.nonSaved = 0;
         }
@@ -265,7 +265,7 @@ export default {
         this.vend = Date(Date.now());
         var Attack_Type = "Virus";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*100;
+        this.nonSaved-=Level_Affectation*2;
         if(this.nonSaved<1){
           this.nonSaved = 0;
         }
@@ -311,7 +311,7 @@ export default {
         this.rsend = Date(Date.now());
         var Attack_Type = "Ransomware";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*100;
+        this.nonSaved-=Level_Affectation*2;
         if(this.nonSaved<1){
           this.nonSaved = 0;
         }
@@ -357,7 +357,7 @@ export default {
         this.dend = Date(Date.now());
         var Attack_Type = "DDoS";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*100;
+        this.nonSaved-=Level_Affectation*2;
         if(this.nonSaved<1){
           this.nonSaved = 0;
         }
@@ -410,6 +410,7 @@ export default {
       }
     },
     savedata: function() {
+      if (["mpressed", "vpressed", "rspressed", "dpressed"].some(key => this[key])) return;
       this.saving = true;
       setTimeout(() => {
         this.savedData = this.savedData+this.nonSaved;
