@@ -14,9 +14,6 @@
             <pulse-loader
               class="mt-3"
               v-show="saving"
-              :loading="loading"
-              :color="color"
-              :size="size"
             ></pulse-loader>
             
           </div>

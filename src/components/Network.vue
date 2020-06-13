@@ -96,7 +96,7 @@ export default {
       });
 
       const vlan1 = [];
-      for (let i = 6; i < 9; i++) {
+      for (let i = 6; i < 8; i++) {
         vlan1.push({
           id: i,
           label: "Computer ("+i+")",
@@ -123,6 +123,46 @@ export default {
           shape: "image"
         });
       }
+
+const telephone = {
+          id: 50,
+          label: "Telephone",
+          image: DIR + "telephone.png",
+          shape: "image"
+        };
+        edges.push({
+          id: 1060,
+          from: 4,
+          to: 50,
+          length: EDGE_LENGTH_MAIN,
+          color: { color: "#6bc1ff" }
+        });
+       const computer = {
+          id: 8,
+          label: "Computer (8)",
+          image: DIR + "computer.png",
+          shape: "image"
+        };
+        edges.push({
+          id: 1061,
+          from: 50,
+          to: 8,
+          length: EDGE_LENGTH_MAIN,
+          color: { color: "#6bc1ff" }
+        });
+        this.startDevices.push({
+          id: 8,
+          label: "Computer (8)",
+          image: DIR + "computer.png",
+          shape: "image"
+        });
+        this.endDevices.push({
+          id: 8,
+          label: "Computer (8)",
+          image: DIR + "computer.png",
+          shape: "image"
+        });
+
 
       const vlan2 = [
         {
@@ -260,6 +300,8 @@ export default {
 
       nodes.push(internet);
       nodes.push(router);
+      nodes.push(telephone);
+      nodes.push(computer);
       nodes.push(...firewalls);
       nodes.push(swtch);
       nodes.push(...vlan1);
@@ -582,10 +624,10 @@ export default {
       });
 
       const vlan1 = [];
-      for (let i = 6; i < 9; i++) {
+      for (let i = 6; i < 8; i++) {
         vlan1.push({
           id: i,
-          label: "Computer",
+          label: "Computer ("+i+")",
           image: DIR + "computer.png",
           shape: "image"
         });
@@ -598,28 +640,68 @@ export default {
         });
         this.startDevices.push({
           id: i,
-          label: "Computer",
+          label: "Computer ("+i+")",
           image: DIR + "computer.png",
           shape: "image"
         });
         this.endDevices.push({
           id: i,
-          label: "Computer",
+          label: "Computer ("+i+")",
           image: DIR + "computer.png",
           shape: "image"
         });
       }
 
+const telephone = {
+          id: 50,
+          label: "Telephone",
+          image: DIR + "telephone.png",
+          shape: "image"
+        };
+        edges.push({
+          id: 1060,
+          from: 4,
+          to: 50,
+          length: EDGE_LENGTH_MAIN,
+          color: { color: "#6bc1ff" }
+        });
+       const computer = {
+          id: 8,
+          label: "Computer (8)",
+          image: DIR + "computer.png",
+          shape: "image"
+        };
+        edges.push({
+          id: 1061,
+          from: 50,
+          to: 8,
+          length: EDGE_LENGTH_MAIN,
+          color: { color: "#6bc1ff" }
+        });
+        this.startDevices.push({
+          id: 8,
+          label: "Computer (8)",
+          image: DIR + "computer.png",
+          shape: "image"
+        });
+        this.endDevices.push({
+          id: 8,
+          label: "Computer (8)",
+          image: DIR + "computer.png",
+          shape: "image"
+        });
+
+
       const vlan2 = [
         {
           id: 9,
-          label: "Mail Server",
+          label: "Mail Server (9)",
           image: DIR + "mail-server.png",
           shape: "image"
         },
         {
           id: 10,
-          label: "Web Server",
+          label: "Web Server (10)",
           image: DIR + "web-server.png",
           shape: "image"
         }
@@ -627,13 +709,13 @@ export default {
       this.endDevices.push(
         {
           id: 9,
-          label: "Mail Server",
+          label: "Mail Server (9)",
           image: DIR + "mail-server.png",
           shape: "image"
         },
         {
           id: 10,
-          label: "Web Server",
+          label: "Web Server (10)",
           image: DIR + "web-server.png",
           shape: "image"
         }
@@ -673,7 +755,7 @@ export default {
       for (let i = 100; i < 103; i++) {
         smartphones.push({
           id: i,
-          label: "Smartphone",
+          label: "Smartphone ("+i+")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -687,13 +769,13 @@ export default {
         });
         this.endDevices.push({
           id: i,
-          label: "Smartphone",
+          label: "Smartphone ("+i+")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
         this.startDevices.push({
           id: i,
-          label: "Smartphone",
+          label: "Smartphone ("+i+")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -703,7 +785,7 @@ export default {
       const vlan4 = [
         {
           id: 12,
-          label: "Database Server",
+          label: "Database Server (12)",
           image: DIR + "database-server.png",
           shape: "image"
         }
@@ -717,7 +799,7 @@ export default {
       });
       this.endDevices.push({
         id: 12,
-        label: "Database Server",
+        label: "Database Server (12)",
         image: DIR + "database-server.png",
         shape: "image"
       });
@@ -725,7 +807,7 @@ export default {
       const vlan5 = [
         {
           id: 13,
-          label: "Backup Server",
+          label: "Backup Server (13)",
           image: DIR + "database-server.png",
           shape: "image"
         }
@@ -739,13 +821,15 @@ export default {
       });
       this.endDevices.push({
         id: 13,
-        label: "Backup Server",
+        label: "Backup Server (13)",
         image: DIR + "database-server.png",
         shape: "image"
       });
 
       nodes.push(internet);
       nodes.push(router);
+      nodes.push(telephone);
+      nodes.push(computer);
       nodes.push(...firewalls);
       nodes.push(swtch);
       nodes.push(...vlan1);
@@ -758,7 +842,6 @@ export default {
       // var container = document.getElementById("network");
       this.nodesList = nodes;
       this.edgesList = edges;
-      
     }
   },
   mounted() {
