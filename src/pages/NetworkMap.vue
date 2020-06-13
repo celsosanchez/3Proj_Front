@@ -4,6 +4,27 @@
       <div class="col-12">
         <h4 slot="header">Network Map</h4>
         <div class="row">
+          <div class="col-md-3">
+            <h4 class="mt-3" >Saved data : {{savedData}} MB</h4>
+          </div>
+          <div class="col-md-1">
+            <base-button v-show="!saving" @click="savedata()" >
+              <i style="font-size: 20px" class="tim-icons icon-cloud-upload-94"></i>
+            </base-button>
+            <pulse-loader
+              class="mt-3"
+              v-show="saving"
+              :loading="loading"
+              :color="color"
+              :size="size"
+            ></pulse-loader>
+            
+          </div>
+        <div class="col-md-3 ml-4 mt-3">
+          <h4 :style="loststyle"> Vulnerable data: {{nonSaved}} MB</h4>
+        </div>
+        </div>
+        <div class="row">
           <div class="col-md-10">
             <card class="network-card" :style="{'height':'600px'}">
               <Network @receives="receives" ref="child"></Network>
@@ -44,8 +65,11 @@
 import Network from "@/components/Network";
 import { NetworkMap } from "@/components";
 import axios from "axios";
+// import { PulseLoader } from 'vue-spinner'
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 export default {
   components: {
+    PulseLoader,
     Network,
     NetworkMap
   },
@@ -83,6 +107,15 @@ export default {
       dstart: Date,
       dend: Date,
 
+      loststyle: "color : white",
+
+      rdminterval: "",
+
+      saving: false,
+
+      savedData: 0,
+
+      nonSaved: 0,
       rdminterval: "",
 
       timeouts: {
@@ -134,6 +167,12 @@ export default {
         obj: obj
       };
     },
+    lostdata:function(){
+      this.loststyle = "color: red"
+      setTimeout(() => {
+        this.loststyle= "color: white"
+      }, 300);
+    },
     ai(){
       this.aipressed = !this.aipressed;
       [{key: "mpressed", func: "mitm"}, {key: "vpressed", func: "virus"}, {key: "rspressed", func: "rsw"}, {key: "dpressed", func: "ddos"}].forEach(({ key, func }) => {
@@ -174,6 +213,11 @@ export default {
         this.mend = Date(Date.now());
         var Attack_Type = "MitM";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
+        this.nonSaved-=Level_Affectation*100;
+        if(this.nonSaved<1){
+          this.nonSaved = 0;
+        }
+        this.lostdata();
         var Affected_Area = [];
         var obj = {
           Attack_Type: Attack_Type,
@@ -214,6 +258,11 @@ export default {
         this.vend = Date(Date.now());
         var Attack_Type = "Virus";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
+        this.nonSaved-=Level_Affectation*100;
+        if(this.nonSaved<1){
+          this.nonSaved = 0;
+        }
+        this.lostdata();
         var Affected_Area = [];
         var obj = {
           Attack_Type: Attack_Type,
@@ -229,8 +278,8 @@ export default {
           Affected_Areas: this.vobj
         });
       }
-      
-    },rsw: async function() {
+    },
+    rsw: async function() {
       this.rspressed = !this.rspressed;
 
       // var Affected_Area=[];
@@ -255,6 +304,11 @@ export default {
         this.rsend = Date(Date.now());
         var Attack_Type = "Ransomware";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
+        this.nonSaved-=Level_Affectation*100;
+        if(this.nonSaved<1){
+          this.nonSaved = 0;
+        }
+        this.lostdata();
         var Affected_Area = [];
         var obj = {
           Attack_Type: Attack_Type,
@@ -270,7 +324,8 @@ export default {
           Affected_Areas: this.rsobj
         });
       }
-    },ddos: async function() {
+    },
+    ddos: async function() {
       this.dpressed = !this.dpressed;
 
       // var Affected_Area=[];
@@ -295,6 +350,11 @@ export default {
         this.dend = Date(Date.now());
         var Attack_Type = "DDoS";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
+        this.nonSaved-=Level_Affectation*100;
+        if(this.nonSaved<1){
+          this.nonSaved = 0;
+        }
+        this.lostdata();
         var Affected_Area = [];
         var obj = {
           Attack_Type: Attack_Type,
@@ -341,17 +401,23 @@ export default {
           console.log("error");
           break;
       }
+    },
+    savedata: function() {
+      this.saving = true;
+      setTimeout(() => {
+        this.savedData = this.savedData+this.nonSaved;
+        this.nonSaved = 0;
+        this.saving = false;
+      }, 2000);
     }
   },
   mounted() {
-    // this.$refs.child.attack(2, 9);
-    // this.$refs.child.disable(2, 9);
-    // this.$refs.child.attack(1, 101);
-    // this.$refs.child.disable(1, 101);
-    // this.$refs.child.attack(1, 13);
-    // this.$refs.child.disable(1, 13);
-    // this.$refs.child.attack(7, 3);
-    // this.$refs.child.disable(7, 3);
+   setInterval(() => {
+     this.nonSaved+=300;
+   }, 3000);
+   
+   
+   this.nonSaved
   }
 }; //:style="{'min-width': '9vw'}"
 </script>
