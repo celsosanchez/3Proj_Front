@@ -13,7 +13,10 @@
 
           <div class="col-md-2">
             <card :style="{'text-align':'center'}">
-              <h3>Attacks</h3>
+              <h3>Defense</h3>
+                <base-button class="button" @click="ai()" :simple="aipressed" type="primary">Defensive AI</base-button>
+
+              <h3 class="mt-5">Attacks</h3>
               <div class="flex">
                 <base-button
                   class="button"
@@ -60,6 +63,7 @@ export default {
       rssrc: Number,
       rsobj: Number,
 
+      aipressed: false,
       rpressed: false,
       mpressed: false,
       vpressed: false,
@@ -79,7 +83,14 @@ export default {
       dstart: Date,
       dend: Date,
 
-      rdminterval: ""
+      rdminterval: "",
+
+      timeouts: {
+        mpressed: null,
+        vpressed: null,
+        rspressed: null,
+        dpressed: null,
+      }
     };
   },
   methods: {
@@ -123,6 +134,21 @@ export default {
         obj: obj
       };
     },
+    ai(){
+      this.aipressed = !this.aipressed;
+      [{key: "mpressed", func: "mitm"}, {key: "vpressed", func: "virus"}, {key: "rspressed", func: "rsw"}, {key: "dpressed", func: "ddos"}].forEach(({ key, func }) => {
+        if (this.aipressed) {
+          if (this[key] && this.timeouts[key] === null) {
+            setTimeout(this[func], 30000)
+          }
+        } else {
+          if (this[key] && this.timeouts[key] !== null) {
+            clearTimeout(this.timeouts[key]);
+            this.timeouts[key] = null;
+          }
+        }
+      })
+    },
     mitm: async function() {
       this.mpressed = !this.mpressed;
 
@@ -137,7 +163,12 @@ export default {
 
         console.log(this.msrc, this.mobj);
         this.$refs.child.attack(this.msrc, this.mobj);
+        if (this.aipressed) this.timeouts.mpressed = setTimeout(this.mitm, 30000);
       } else {
+        if (this.timeouts.mpressed !== null) {
+          clearTimeout(this.timeouts.mpressed);
+          this.timeouts.mpressed = null;
+        }
         console.log(this.msrc, this.mobj);
         this.$refs.child.disable(this.msrc, this.mobj);
         this.mend = Date(Date.now());
@@ -172,7 +203,12 @@ export default {
 
         console.log(this.vsrc, this.vobj);
         this.$refs.child.attack(this.vsrc, this.vobj);
+        if (this.aipressed) this.timeouts.vpressed = setTimeout(this.virus, 30000);
       } else {
+        if (this.timeouts.vpressed !== null) {
+          clearTimeout(this.timeouts.vpressed);
+          this.timeouts.vpressed = null;
+        }
         console.log(this.vsrc, this.vobj);
         this.$refs.child.disable(this.vsrc, this.vobj);
         this.vend = Date(Date.now());
@@ -208,7 +244,12 @@ export default {
 
         console.log(this.rssrc, this.rsobj);
         this.$refs.child.attack(this.rssrc, this.rsobj);
+        if (this.aipressed) this.timeouts.rspressed = setTimeout(this.rsw, 30000);
       } else {
+        if (this.timeouts.rspressed !== null) {
+          clearTimeout(this.timeouts.rspressed);
+          this.timeouts.rspressed = null;
+        }
         console.log(this.msrc, this.rsobj);
         this.$refs.child.disable(this.rssrc, this.rsobj);
         this.rsend = Date(Date.now());
@@ -243,7 +284,12 @@ export default {
 
         console.log(this.dsrc, this.dobj);
         this.$refs.child.attack(this.dsrc, this.dobj);
+        if (this.aipressed) this.timeouts.dpressed = setTimeout(this.ddos, 30000);
       } else {
+        if (this.timeouts.dpressed !== null) {
+          clearTimeout(this.timeouts.dpressed);
+          this.timeouts.dpressed = null;
+        }
         console.log(this.dsrc, this.dobj);
         this.$refs.child.disable(this.dsrc, this.dobj);
         this.dend = Date(Date.now());
