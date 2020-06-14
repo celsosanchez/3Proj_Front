@@ -470,7 +470,7 @@ export default {
         }
       });
 
-      this.totalTime = totalTime / 60;
+      this.totalTime =Math.floor( totalTime / 60);
 
       return {
         tvalues: tvalues,
