@@ -13,7 +13,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="#pablo">{{routeName}}</a>
+        <h1 class="navbar-brand">{{routeName}}</h1>
       </div>
       <button class="navbar-toggler" type="button"
               @click="toggleMenu"
@@ -49,7 +49,7 @@
                            title-tag="a" class="nav-item">
               <a slot="title" href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true">
                 <div class="notification d-none d-lg-block d-xl-block"></div>
-                <i class="tim-icons icon-sound-wave"></i>
+                <i class="tim-icons icon-bell-55"></i>
                 <p class="d-lg-none">
                   New Notifications
                 </p>
@@ -150,4 +150,7 @@
   };
 </script>
 <style>
+.icon-bell-55 {
+  margin-top: 4px;
+}
 </style>
