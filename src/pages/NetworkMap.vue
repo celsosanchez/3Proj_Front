@@ -476,7 +476,7 @@ export default {
       if (this.rpressed) {
         this.rdminterval = setInterval(() => {
           this.rdm();
-        }, 2000);
+        }, 10000);
       } else {
         clearInterval(this.rdminterval);
       }
