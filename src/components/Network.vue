@@ -238,12 +238,7 @@ export default {
           length: EDGE_LENGTH_MAIN,
           color: { color: "#6bc1ff" }
         });
-        this.endDevices.push({
-          id: i,
-          label: "Smartphone (" + i + ")",
-          image: DIR + "smartphone.png",
-          shape: "image"
-        });
+       
         this.startDevices.push({
           id: i,
           label: "Smartphone (" + i + ")",
@@ -765,12 +760,7 @@ export default {
           length: EDGE_LENGTH_MAIN,
           color: { color: "#6bc1ff" }
         });
-        this.endDevices.push({
-          id: i,
-          label: "Smartphone (" + i + ")",
-          image: DIR + "smartphone.png",
-          shape: "image"
-        });
+        
         this.startDevices.push({
           id: i,
           label: "Smartphone (" + i + ")",

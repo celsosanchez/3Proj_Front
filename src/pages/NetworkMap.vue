@@ -126,6 +126,29 @@ export default {
     };
   },
   methods: {
+    smartphoneAttack(src, obj) {
+      console.log(" before smartphone attack  " + src, obj);
+
+      if (src == 100 || src == 101 || src == 102) {
+        var possible = [100, 101, 102];
+        possible.splice(possible.indexOf(src), 1);
+        obj = possible[Math.floor(Math.random() * 2)];
+      } else {
+        var as = true;
+        while (as) {
+          console.log(obj);
+          if (obj == 100 || obj == 101 || obj == 102) {
+            var rndom = this.rndmOnDevices();
+            obj = rndom.obj;
+          } else {
+            console.log(obj);
+            as = false;
+          }
+        }
+      }
+      console.log(" after smartphone attack  " + src, obj);
+      return { src: src, obj: obj };
+    },
     receives(devices) {
       console.log("activated");
       devices.start.forEach(element => {
@@ -207,6 +230,7 @@ export default {
         this.mstart = Date(Date.now());
         var rndom = this.rndmOnDevices();
         this.msrc = rndom.src;
+
         if (this.aipressed && this.msrc == 1) {
           this.$refs.child.attack(1, 3);
           setTimeout(() => {
@@ -215,6 +239,10 @@ export default {
           }, 1500);
         } else {
           this.mobj = rndom.obj;
+          var smrtcheck = this.smartphoneAttack(this.msrc, this.mobj);
+          this.msrc = smrtcheck.src;
+          this.mobj = smrtcheck.obj;
+
           if (this.aipressed && (this.mobj == 9 || this.mobj == 10)) {
             this.$refs.child.attack(this.msrc, 5);
             setTimeout(() => {
@@ -275,6 +303,9 @@ export default {
           }, 1500);
         } else {
           this.vobj = rndom.obj;
+          var smrtcheck = this.smartphoneAttack(this.vsrc, this.vobj);
+          this.vsrc = smrtcheck.src;
+          this.vobj = smrtcheck.obj;
           if (this.aipressed && (this.vobj == 9 || this.vobj == 10)) {
             this.$refs.child.attack(this.vsrc, 5);
             setTimeout(() => {
@@ -336,6 +367,11 @@ export default {
           }, 1500);
         } else {
           this.rsobj = rndom.obj;
+
+          var smrtcheck = this.smartphoneAttack(this.rssrc, this.rsobj);
+          this.rssrc = smrtcheck.src;
+          this.rsobj = smrtcheck.obj;
+
           if (this.aipressed && (this.rsobj == 9 || this.rsobj == 10)) {
             this.$refs.child.attack(this.rssrc, 5);
             setTimeout(() => {
@@ -484,6 +520,10 @@ export default {
     }, 3000);
 
     this.nonSaved;
+
+    // setTimeout(() => {
+
+    // }, 3000);
   }
 }; //:style="{'min-width': '9vw'}"
 </script>
