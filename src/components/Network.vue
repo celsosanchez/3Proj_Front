@@ -99,7 +99,7 @@ export default {
       for (let i = 6; i < 8; i++) {
         vlan1.push({
           id: i,
-          label: "Computer ("+i+")",
+          label: "Computer (" + i + ")",
           image: DIR + "computer.png",
           shape: "image"
         });
@@ -112,57 +112,56 @@ export default {
         });
         this.startDevices.push({
           id: i,
-          label: "Computer ("+i+")",
+          label: "Computer (" + i + ")",
           image: DIR + "computer.png",
           shape: "image"
         });
         this.endDevices.push({
           id: i,
-          label: "Computer ("+i+")",
+          label: "Computer (" + i + ")",
           image: DIR + "computer.png",
           shape: "image"
         });
       }
 
-const telephone = {
-          id: 50,
-          label: "Telephone",
-          image: DIR + "telephone.png",
-          shape: "image"
-        };
-        edges.push({
-          id: 1060,
-          from: 4,
-          to: 50,
-          length: EDGE_LENGTH_MAIN,
-          color: { color: "#6bc1ff" }
-        });
-       const computer = {
-          id: 8,
-          label: "Computer (8)",
-          image: DIR + "computer.png",
-          shape: "image"
-        };
-        edges.push({
-          id: 1061,
-          from: 50,
-          to: 8,
-          length: EDGE_LENGTH_MAIN,
-          color: { color: "#6bc1ff" }
-        });
-        this.startDevices.push({
-          id: 8,
-          label: "Computer (8)",
-          image: DIR + "computer.png",
-          shape: "image"
-        });
-        this.endDevices.push({
-          id: 8,
-          label: "Computer (8)",
-          image: DIR + "computer.png",
-          shape: "image"
-        });
-
+      const telephone = {
+        id: 50,
+        label: "Telephone",
+        image: DIR + "telephone.png",
+        shape: "image"
+      };
+      edges.push({
+        id: 1060,
+        from: 4,
+        to: 50,
+        length: EDGE_LENGTH_MAIN,
+        color: { color: "#6bc1ff" }
+      });
+      const computer = {
+        id: 8,
+        label: "Computer (8)",
+        image: DIR + "computer.png",
+        shape: "image"
+      };
+      edges.push({
+        id: 1061,
+        from: 50,
+        to: 8,
+        length: EDGE_LENGTH_MAIN,
+        color: { color: "#6bc1ff" }
+      });
+      this.startDevices.push({
+        id: 8,
+        label: "Computer (8)",
+        image: DIR + "computer.png",
+        shape: "image"
+      });
+      this.endDevices.push({
+        id: 8,
+        label: "Computer (8)",
+        image: DIR + "computer.png",
+        shape: "image"
+      });
 
       const vlan2 = [
         {
@@ -227,7 +226,7 @@ const telephone = {
       for (let i = 100; i < 103; i++) {
         smartphones.push({
           id: i,
-          label: "Smartphone ("+i+")",
+          label: "Smartphone (" + i + ")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -241,13 +240,13 @@ const telephone = {
         });
         this.endDevices.push({
           id: i,
-          label: "Smartphone ("+i+")",
+          label: "Smartphone (" + i + ")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
         this.startDevices.push({
           id: i,
-          label: "Smartphone ("+i+")",
+          label: "Smartphone (" + i + ")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -548,7 +547,7 @@ const telephone = {
         this.deactivateEdge(element);
       });
     },
-    repairEdges(){
+    repairEdges() {
       var EDGE_LENGTH_MAIN = 150;
       var EDGE_LENGTH_SUB = 50;
       const DIR = "/img/network/";
@@ -627,7 +626,7 @@ const telephone = {
       for (let i = 6; i < 8; i++) {
         vlan1.push({
           id: i,
-          label: "Computer ("+i+")",
+          label: "Computer (" + i + ")",
           image: DIR + "computer.png",
           shape: "image"
         });
@@ -640,57 +639,56 @@ const telephone = {
         });
         this.startDevices.push({
           id: i,
-          label: "Computer ("+i+")",
+          label: "Computer (" + i + ")",
           image: DIR + "computer.png",
           shape: "image"
         });
         this.endDevices.push({
           id: i,
-          label: "Computer ("+i+")",
+          label: "Computer (" + i + ")",
           image: DIR + "computer.png",
           shape: "image"
         });
       }
 
-const telephone = {
-          id: 50,
-          label: "Telephone",
-          image: DIR + "telephone.png",
-          shape: "image"
-        };
-        edges.push({
-          id: 1060,
-          from: 4,
-          to: 50,
-          length: EDGE_LENGTH_MAIN,
-          color: { color: "#6bc1ff" }
-        });
-       const computer = {
-          id: 8,
-          label: "Computer (8)",
-          image: DIR + "computer.png",
-          shape: "image"
-        };
-        edges.push({
-          id: 1061,
-          from: 50,
-          to: 8,
-          length: EDGE_LENGTH_MAIN,
-          color: { color: "#6bc1ff" }
-        });
-        this.startDevices.push({
-          id: 8,
-          label: "Computer (8)",
-          image: DIR + "computer.png",
-          shape: "image"
-        });
-        this.endDevices.push({
-          id: 8,
-          label: "Computer (8)",
-          image: DIR + "computer.png",
-          shape: "image"
-        });
-
+      const telephone = {
+        id: 50,
+        label: "Telephone",
+        image: DIR + "telephone.png",
+        shape: "image"
+      };
+      edges.push({
+        id: 1060,
+        from: 4,
+        to: 50,
+        length: EDGE_LENGTH_MAIN,
+        color: { color: "#6bc1ff" }
+      });
+      const computer = {
+        id: 8,
+        label: "Computer (8)",
+        image: DIR + "computer.png",
+        shape: "image"
+      };
+      edges.push({
+        id: 1061,
+        from: 50,
+        to: 8,
+        length: EDGE_LENGTH_MAIN,
+        color: { color: "#6bc1ff" }
+      });
+      this.startDevices.push({
+        id: 8,
+        label: "Computer (8)",
+        image: DIR + "computer.png",
+        shape: "image"
+      });
+      this.endDevices.push({
+        id: 8,
+        label: "Computer (8)",
+        image: DIR + "computer.png",
+        shape: "image"
+      });
 
       const vlan2 = [
         {
@@ -755,7 +753,7 @@ const telephone = {
       for (let i = 100; i < 103; i++) {
         smartphones.push({
           id: i,
-          label: "Smartphone ("+i+")",
+          label: "Smartphone (" + i + ")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -769,13 +767,13 @@ const telephone = {
         });
         this.endDevices.push({
           id: i,
-          label: "Smartphone ("+i+")",
+          label: "Smartphone (" + i + ")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
         this.startDevices.push({
           id: i,
-          label: "Smartphone ("+i+")",
+          label: "Smartphone (" + i + ")",
           image: DIR + "smartphone.png",
           shape: "image"
         });
@@ -847,7 +845,7 @@ const telephone = {
   mounted() {
     this.draw();
     this.recieves();
-    
+
     // this.attack(6,7);
     // setTimeout(_ => {
 

@@ -5,21 +5,17 @@
         <h4 slot="header">Network Map</h4>
         <div class="row">
           <div class="col-md-3">
-            <h4 class="mt-3" >Saved data : {{savedData}} MB</h4>
+            <h4 class="mt-3">Saved data : {{savedData}} MB</h4>
           </div>
           <div class="col-md-1">
-            <base-button v-show="!saving" @click="savedata()" >
+            <base-button v-show="!saving" @click="savedata()">
               <i style="font-size: 20px" class="tim-icons icon-cloud-upload-94"></i>
             </base-button>
-            <pulse-loader
-              class="mt-3"
-              v-show="saving"
-            ></pulse-loader>
-            
+            <pulse-loader class="mt-3" v-show="saving"></pulse-loader>
           </div>
-        <div class="col-md-3 ml-4 mt-3">
-          <h4 :style="loststyle"> Vulnerable data: {{nonSaved}} MB</h4>
-        </div>
+          <div class="col-md-3 ml-4 mt-3">
+            <h4 :style="loststyle">Vulnerable data: {{nonSaved}} MB</h4>
+          </div>
         </div>
         <div class="row">
           <div class="col-md-10">
@@ -32,7 +28,12 @@
           <div class="col-md-2">
             <card :style="{'text-align':'center'}">
               <h3>Defense</h3>
-                <base-button class="button" @click="ai()" :simple="aipressed" type="primary">Defensive AI</base-button>
+              <base-button
+                class="button"
+                @click="ai()"
+                :simple="aipressed"
+                type="primary"
+              >Defense AI</base-button>
 
               <h3 class="mt-5">Attacks</h3>
               <div class="flex">
@@ -120,7 +121,7 @@ export default {
         mpressed: null,
         vpressed: null,
         rspressed: null,
-        dpressed: null,
+        dpressed: null
       }
     };
   },
@@ -165,24 +166,29 @@ export default {
         obj: obj
       };
     },
-    lostdata:function(){
-      this.loststyle = "color: red"
+    lostdata: function() {
+      this.loststyle = "color: red";
       setTimeout(() => {
-        this.loststyle= "color: white"
+        this.loststyle = "color: white";
       }, 300);
     },
-    ai(){
+    ai() {
       this.aipressed = !this.aipressed;
       if (this.aipressed && this.saveDataInterval == null) {
-        this.saveDataInterval = setInterval(this.savedata, 10000)
+        this.saveDataInterval = setInterval(this.savedata, 10000);
       } else if (!this.aipressed && this.saveDataInterval != null) {
         clearInterval(this.saveDataInterval);
         this.saveDataInterval = null;
       }
-      [{key: "mpressed", func: "mitm"}, {key: "vpressed", func: "virus"}, {key: "rspressed", func: "rsw"}, {key: "dpressed", func: "ddos"}].forEach(({ key, func }) => {
+      [
+        { key: "mpressed", func: "mitm" },
+        { key: "vpressed", func: "virus" },
+        { key: "rspressed", func: "rsw" },
+        { key: "dpressed", func: "ddos" }
+      ].forEach(({ key, func }) => {
         if (this.aipressed) {
           if (this[key] && this.timeouts[key] === null) {
-            setTimeout(this[func], 30000)
+            setTimeout(this[func], 30000);
           }
         } else {
           if (this[key] && this.timeouts[key] !== null) {
@@ -190,7 +196,7 @@ export default {
             this.timeouts[key] = null;
           }
         }
-      })
+      });
     },
     mitm: async function() {
       this.mpressed = !this.mpressed;
@@ -201,12 +207,27 @@ export default {
         this.mstart = Date(Date.now());
         var rndom = this.rndmOnDevices();
         this.msrc = rndom.src;
-
-        this.mobj = rndom.obj;
-
-        console.log(this.msrc, this.mobj);
-        this.$refs.child.attack(this.msrc, this.mobj);
-        if (this.aipressed) this.timeouts.mpressed = setTimeout(this.mitm, 30000);
+        if (this.aipressed && this.msrc == 1) {
+          this.$refs.child.attack(1, 3);
+          setTimeout(() => {
+            this.$refs.child.disable(1, 3);
+            this.mpressed = false;
+          }, 1500);
+        } else {
+          this.mobj = rndom.obj;
+          if (this.aipressed && (this.mobj == 9 || this.mobj == 10)) {
+            this.$refs.child.attack(this.msrc, 5);
+            setTimeout(() => {
+              this.$refs.child.disable(this.msrc, 5);
+              this.mpressed = false;
+            }, 1500);
+          } else {
+            console.log(this.msrc, this.mobj);
+            this.$refs.child.attack(this.msrc, this.mobj);
+            if (this.aipressed)
+              this.timeouts.mpressed = setTimeout(this.mitm, 30000);
+          }
+        }
       } else {
         if (this.timeouts.mpressed !== null) {
           clearTimeout(this.timeouts.mpressed);
@@ -217,8 +238,8 @@ export default {
         this.mend = Date(Date.now());
         var Attack_Type = "MitM";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*2;
-        if(this.nonSaved<1){
+        this.nonSaved -= Level_Affectation * 2;
+        if (this.nonSaved < 1) {
           this.nonSaved = 0;
         }
         this.lostdata();
@@ -246,12 +267,27 @@ export default {
         this.vstart = Date(Date.now());
         var rndom = this.rndmOnDevices();
         this.vsrc = rndom.src;
-
-        this.vobj = rndom.obj;
-
-        console.log(this.vsrc, this.vobj);
-        this.$refs.child.attack(this.vsrc, this.vobj);
-        if (this.aipressed) this.timeouts.vpressed = setTimeout(this.virus, 30000);
+        if (this.aipressed && this.vsrc == 1) {
+          this.$refs.child.attack(1, 3);
+          setTimeout(() => {
+            this.$refs.child.disable(1, 3);
+            this.vpressed = false;
+          }, 1500);
+        } else {
+          this.vobj = rndom.obj;
+          if (this.aipressed && (this.vobj == 9 || this.vobj == 10)) {
+            this.$refs.child.attack(this.vsrc, 5);
+            setTimeout(() => {
+              this.$refs.child.disable(this.vsrc, 5);
+              this.vpressed = false;
+            }, 1500);
+          } else {
+            console.log(this.vsrc, this.vobj);
+            this.$refs.child.attack(this.vsrc, this.vobj);
+            if (this.aipressed)
+              this.timeouts.vpressed = setTimeout(this.virus, 30000);
+          }
+        }
       } else {
         if (this.timeouts.vpressed !== null) {
           clearTimeout(this.timeouts.vpressed);
@@ -262,8 +298,8 @@ export default {
         this.vend = Date(Date.now());
         var Attack_Type = "Virus";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*2;
-        if(this.nonSaved<1){
+        this.nonSaved -= Level_Affectation * 2;
+        if (this.nonSaved < 1) {
           this.nonSaved = 0;
         }
         this.lostdata();
@@ -292,12 +328,27 @@ export default {
         this.rsstart = Date(Date.now());
         var rndom = this.rndmOnDevices();
         this.rssrc = rndom.src;
-
-        this.rsobj = rndom.obj;
-
-        console.log(this.rssrc, this.rsobj);
-        this.$refs.child.attack(this.rssrc, this.rsobj);
-        if (this.aipressed) this.timeouts.rspressed = setTimeout(this.rsw, 30000);
+        if (this.aipressed && this.rssrc == 1) {
+          this.$refs.child.attack(1, 3);
+          setTimeout(() => {
+            this.$refs.child.disable(1, 3);
+            this.rspressed = false;
+          }, 1500);
+        } else {
+          this.rsobj = rndom.obj;
+          if (this.aipressed && (this.rsobj == 9 || this.rsobj == 10)) {
+            this.$refs.child.attack(this.rssrc, 5);
+            setTimeout(() => {
+              this.$refs.child.disable(this.rssrc, 5);
+              this.rspressed = false;
+            }, 1500);
+          } else {
+            console.log(this.rssrc, this.rsobj);
+            this.$refs.child.attack(this.rssrc, this.rsobj);
+            if (this.aipressed)
+              this.timeouts.rspressed = setTimeout(this.rsw, 30000);
+          }
+        }
       } else {
         if (this.timeouts.rspressed !== null) {
           clearTimeout(this.timeouts.rspressed);
@@ -308,8 +359,8 @@ export default {
         this.rsend = Date(Date.now());
         var Attack_Type = "Ransomware";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*2;
-        if(this.nonSaved<1){
+        this.nonSaved -= Level_Affectation * 2;
+        if (this.nonSaved < 1) {
           this.nonSaved = 0;
         }
         this.lostdata();
@@ -338,12 +389,20 @@ export default {
         this.dstart = Date(Date.now());
         var rndom = this.rndmOnDevices();
         this.dsrc = 1;
+        if (this.aipressed && this.dsrc == 1) {
+          this.$refs.child.attack(1, 3);
+          setTimeout(() => {
+            this.$refs.child.disable(1, 3);
+            this.dpressed = false;
+          }, 1500);
+        } else {
+          this.dobj = rndom.obj;
 
-        this.dobj = rndom.obj;
-
-        console.log(this.dsrc, this.dobj);
-        this.$refs.child.attack(this.dsrc, this.dobj);
-        if (this.aipressed) this.timeouts.dpressed = setTimeout(this.ddos, 30000);
+          console.log(this.dsrc, this.dobj);
+          this.$refs.child.attack(this.dsrc, this.dobj);
+          if (this.aipressed)
+            this.timeouts.dpressed = setTimeout(this.ddos, 30000);
+        }
       } else {
         if (this.timeouts.dpressed !== null) {
           clearTimeout(this.timeouts.dpressed);
@@ -354,8 +413,8 @@ export default {
         this.dend = Date(Date.now());
         var Attack_Type = "DDoS";
         var Level_Affectation = Math.floor(Math.random() * 10 + 1);
-        this.nonSaved-=Level_Affectation*2;
-        if(this.nonSaved<1){
+        this.nonSaved -= Level_Affectation * 2;
+        if (this.nonSaved < 1) {
           this.nonSaved = 0;
         }
         this.lostdata();
@@ -407,22 +466,24 @@ export default {
       }
     },
     savedata: function() {
-      if (["mpressed", "vpressed", "rspressed", "dpressed"].some(key => this[key])) return;
+      if (
+        ["mpressed", "vpressed", "rspressed", "dpressed"].some(key => this[key])
+      )
+        return;
       this.saving = true;
       setTimeout(() => {
-        this.savedData = this.savedData+this.nonSaved;
+        this.savedData = this.savedData + this.nonSaved;
         this.nonSaved = 0;
         this.saving = false;
       }, 2000);
     }
   },
   mounted() {
-   setInterval(() => {
-     this.nonSaved+=10;
-   }, 3000);
-   
-   
-   this.nonSaved
+    setInterval(() => {
+      this.nonSaved += 10;
+    }, 3000);
+
+    this.nonSaved;
   }
 }; //:style="{'min-width': '9vw'}"
 </script>
